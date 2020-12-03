@@ -1,1 +1,11 @@
 @import "node_modules/bootstrap/scss/bootstrap";
+
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+
+@import "@fortawesome/fontawesome-free/scss/solid";
+
+html, body {
+  background-color: #fafafa;
+}
