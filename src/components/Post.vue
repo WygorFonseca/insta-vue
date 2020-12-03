@@ -3,10 +3,10 @@
     <div class="w-100 bg-white border border-gray rounded">
       <!-- Cabeçalho contendo foto do usuário, nome, outros detalhes e botão de mais opções -->
       <header class="d-flex flex-row align-items-center py-2 px-3">
-        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" width="40" height="40" alt="">
+        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" width="40" height="40" alt="Foto">
         <div class="ml-2 flex-fill">
-          <h6 class="mb-0">Nome de usuário</h6>
-          <small>Teste</small>
+          <h6 class="mb-0">{{ user.name }}</h6>
+          <small>{{ user.description }}</small>
         </div>
         <button class="btn btn-sm px-0">
           <i class="fas fa-ellipsis-h"></i>
@@ -21,13 +21,15 @@
         <div class="d-flex flex-row mb-2">
           <div class="flex-fill">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn p-0 mr-3"><i class="fas fa-lg fa-heart"></i></button>
-              <button type="button" class="btn p-0 mr-3"><i class="fas fa-lg fa-comment"></i></button>
-              <button type="button" class="btn p-0"><i class="fas fa-lg fa-paper-plane"></i></button>
+              <button @click="isLiked = !isLiked" type="button" class="btn p-0 mr-3">
+                <i class="fa-lg fa-heart" :class="isLiked ? 'fas text-danger' : 'far'"></i>
+              </button>
+              <button type="button" class="btn p-0 mr-3"><i class="far fa-lg fa-comment"></i></button>
+              <button type="button" class="btn p-0"><i class="far fa-lg fa-paper-plane"></i></button>
             </div>
           </div>
           <button class="btn p-0">
-            <i class="fas fa-bookmark fa-lg"></i>
+            <i class="far fa-bookmark fa-lg"></i>
           </button>
         </div>
         <!-- Quem curtiu -->
@@ -55,8 +57,14 @@
 <script>
 export default {
   name: "Post",
-  // props: {
-  //   msg: String
-  // }
+  data () {
+    return {
+      user: {
+        name: "Nome do usuário",
+        description: "Detalhes..."
+      },
+      isLiked: false,
+    }
+  }
 };
 </script>

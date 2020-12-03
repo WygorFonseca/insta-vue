@@ -5,7 +5,30 @@
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 @import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
 
 html, body {
   background-color: #fafafa;
 }
+// .teste {
+//   position: relative;
+// }
+
+// .instagram-story-gradient{
+//   background: #000;
+//   width: 66px;
+//   height: 66px;
+//   border-radius: 33px;
+//   position: absolute;
+//   left: -5px;
+//   top: -5px;
+//   z-index: 1;
+// }
+// .teste > img {
+//   position: relative;
+//   z-index: 2;
+// }
+// .teste {
+//   width: 66px;
+//   height: 66px;
+// }
