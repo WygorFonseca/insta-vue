@@ -44,10 +44,11 @@
   border-radius: 25px;
 }
 .story {
-  padding: 2.5px;
+  padding: 2px;
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);;
   border-radius: 50%;
-  height: 54.5px;
+  height: 54px;
+  width: 54px;
 }
 </style>
 
