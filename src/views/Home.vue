@@ -16,9 +16,6 @@
       </div>
     </div>
     <Footer class="d-block d-sm-none" v-if="$appDevice == 'mobile'"/>
-    <Footer class="d-block d-md-none" v-if="$appDevice == 'desktop'"/>
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
   </div>
 </template>
 
