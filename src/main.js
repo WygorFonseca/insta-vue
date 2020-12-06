@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import vSelect from 'vue-select'
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
@@ -10,6 +11,8 @@ import 'bootstrap';
 import firebase from './auth/firebase'
 
 Vue.config.productionTip = false;
+
+Vue.component('v-select', vSelect)
 
 const getDeviceType = () => {
   const ua = navigator.userAgent;

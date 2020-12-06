@@ -10,9 +10,20 @@
       <button class="btn btn-sm" v-if="$appDevice == 'mobile'">
         <i class="fas fa-lg fa-paper-plane"></i>
       </button>
-      <div class="d-none d-sm-block">
-        <form class="form-inline mx-auto">
-          <input type="text" class="col-xs-4 form-control form-control-sm p-0 px-3" placeholder="Pesquisar">
+      <div class="d-none d-sm-block w-100">
+        <form class="form-inline mx-auto w-50 px-5">
+          <v-select class="w-100" size="sm" placeholder="Pesquisar" :options="searchOptions">
+            <template v-slot:option="option">
+              <div class="d-flex flex-row align-items-center">
+                <img src="../../assets/wygor.jpg" class="rounded-circle" width="40" alt="">
+                <div class="ml-2">
+                  <h6 class="mb-0">{{ option.label }}</h6>
+                  <small>Desenvolvedor</small>
+                </div>
+              </div>
+            </template>
+          </v-select>
+          <!-- <input type="text" class="col-xs-4 form-control form-control-sm p-0 px-3" placeholder="Pesquisar"> -->
         </form>
       </div>
       <ul class=" col-xs-4 navbar-nav" v-if="$appDevice == 'desktop'">
@@ -59,5 +70,14 @@
 <script>
 export default {
   name: "Navbar",
+  data () {
+    return {
+      searchOptions:[
+        { code: 1, label: "Wygor Fonseca" },
+        { code: 1, label: "Dev FullStack" },
+        { code: 1, label: "Dev" },
+      ]
+    }
+  }
 }
 </script>

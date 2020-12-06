@@ -1,5 +1,8 @@
 # insta-vue
 
+<!-- ### Funcionalidades
+- [x] Layout da página -->
+
 ## Project setup
 ```
 yarn install

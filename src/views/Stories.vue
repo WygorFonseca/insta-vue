@@ -1,0 +1,203 @@
+<template>
+  <div class="storie h-100">
+    <div class="container-fluid bg-dark-2 h-100">
+      <div class="row justify-content-center h-100">
+        <div class="col d-none d-sm-block"></div>
+        <div class="p-0 rounded-075 col-lg-3" style="background: #000">
+          <div class="h-100 text-center">
+            <div>{{ images[story] }}</div>
+            <div class="pause w-100">
+              <div class="progress-container px-2 w-100"  :key="'progress_' + storyId + story">
+                <div
+                  v-for="n in count"
+                  :style="`animation-duration: ${vtime}ms`"
+                  :class="story == n ? (vtime_started ? 'active' : '') : (story > n ? 'passed' : '')"
+                  :key="'storyprogress_' + storyId + n"
+                  class="progress"
+                ></div>
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center h-100">
+              <img
+                v-for="n in count"
+                :key="storyId + n"
+                :src="`https://picsum.photos/800/1400?ramdon=${parseInt(storyId) + 100 + n}`"
+                v-show="n == story"
+                @load="storyImageLoad(n)"
+                @error="storyImageError(n)"
+                width="100%" max-height="100%" alt="Story" class="rounded-075"
+              >
+            </div>
+            <div :class="hasPrevStory ? 'd-flex' : 'd-none'" class="floating-story-btn-container f-story-btn-left flex-row align-items-center">
+              <button @click="prevStory()" class="btn btn-light my-auto text-dark shadow rounded-circle">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+            </div>
+            <div class="floating-story-btn-container f-story-btn-right d-flex flex-row align-items-center">
+              <button @click="nextStory()" class="btn btn-light my-auto text-dark shadow rounded-circle">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col d-none d-sm-block text-right mt-3">
+          <button @click="$router.push('/')" class="btn btn-sm text-white">
+            <i class="fas fa-lg fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.progress-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+.progress {
+  height: 3px;
+  flex-grow: 1;
+  border-radius: 4px;
+  margin: 0 5px;
+  display: flex;
+  background-image: -webkit-linear-gradient(left, 
+    rgba(255,255,255,.5) 0%,
+    rgba(255,255,255,.5) 50%,
+    rgba(88, 89, 104,.5) 50.001%,
+    rgba(88, 89, 104,.5) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 200%;
+  background-color: #666;
+  background-position: 100% 50%;
+  animation-timing-function: linear;
+  animation-delay: .2s;
+}
+
+.progress.active {
+  animation-name: Loader;
+}
+
+.progress.passed {
+    background-position: 0 0; 
+}
+
+@keyframes Loader {
+  0%   { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+.floating-story-btn-container{
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  margin: auto;
+}
+.f-story-btn-left {
+  left: 5px;
+}
+.f-story-btn-right {
+  right: 5px;
+}
+.rounded-075 {
+  border-radius: 0.75em;
+}
+</style>
+
+<script>
+// @ is an alias to /src
+// import Navbar from "@/components/layout/Navbar.vue";
+// import Footer from "@/components/layout/FooterNav.vue";
+// import Stories from "@/components/Stories.vue";
+// import Post from "@/components/Post.vue";
+
+let nextStoryInterval
+
+export default {
+  name: "Stories",
+  props: ['storyId'],
+  data () {
+    return {
+      story: 1, // Número do stori
+      count: 2, // Quantidade de stories
+      loaded: 0,
+      vtime: 5000, // Tempo de visualização
+      vtime_started: false, // Se o tempo de visualização já está sendo contado
+      images: []
+    }
+  },
+  watch: {
+    '$route': function (){
+      this.count = parseInt(this.storyId) % 4 + 1
+      this.resetStories();
+    }
+  },
+  methods: {
+    resetStories () {
+      this.story = 1;
+      this.loaded = 0
+      this.vtime_started = false;
+      clearInterval(nextStoryInterval);
+    },
+    prevStory () {
+
+    },
+    nextStory () {
+      clearInterval(nextStoryInterval)
+      nextStoryInterval = setInterval(() => {
+        this.nextStory()
+      }, this.vtime)
+
+      if(this.story == this.count){
+        this.resetStories()  
+        clearInterval(nextStoryInterval);
+        this.$router.push(`/stories/${parseInt(this.storyId) + 1}`)
+        return;
+      }
+      // } else if (this.story + 1 != this.count && this.story + 1 != this.count) {
+      //   this.startViewCount()
+      // } else {
+
+      // }
+
+      this.story++;
+    },
+    storyImageError (image) {
+      console.error(image);
+      this.loaded++
+      // if(this.loaded == this.count) this.startViewCount()
+      if(!this.vtime_started) this.startViewCount()
+    },
+    storyImageLoad (image) {
+      console.log(image);
+      this.loaded++
+      // if(this.loaded == this.count) this.startViewCount()
+      if(!this.vtime_started) this.startViewCount()
+      // if(image == 1) this.startViewCount()
+    },
+    startViewCount () {
+      // alert(1)
+      console.log("aa", this.storyId, this.story, this.vtime_started)
+      // Inicia o timeout para mudar de story
+      this.vtime_started = true;
+
+      nextStoryInterval = setInterval(() => {
+        this.nextStory()
+      }, this.vtime)
+    }
+  },
+  computed: {
+    hasPrevStory () {
+      return this.storyId > 0
+    }
+  }
+  // components: { Navbar, Footer, Post, Stories }
+};
+</script>
