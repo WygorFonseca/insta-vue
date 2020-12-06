@@ -8,9 +8,26 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "@fortawesome/fontawesome-free/scss/regular";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
+$vs-component-line-height: 1.0;
+
+//  Active State
+$vs-state-active-bg: #000000;
+$vs-state-active-color: #000000;
+
+@import "../node_modules/vue-select/dist/vue-select.css";
+
 html, body, div#app {
   background-color: #fafafa;
   height: 100%;
+}
+
+button {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.bg-dark-2 {
+  background-color: #1a1a1a;
 }
 
 .fade-enter-active, .fade-leave-active {

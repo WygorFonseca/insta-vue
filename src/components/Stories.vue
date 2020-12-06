@@ -1,12 +1,12 @@
 <template>
   <div class="w-100 bg-white border border-gray rounded pt-3 pb-2 stories">
     <div class="d-flex flex-row mx-2" id="stories-scroll-area" style="overflow-x: scroll">
-      <div v-for="n in 25" :key="n" class="text-center">
+      <button @click="viewStorie(n)" v-for="n in 25" :key="n" class="text-center btn p-0 border-0">
         <div class="mx-1 story">
           <img class="rounded-circle" src="https://img1.gratispng.com/20180623/vr/kisspng-computer-icons-avatar-social-media-blog-font-aweso-avatar-icon-5b2e99c3c1e473.3568135015297806757942.jpg" width="50" height="50" alt="Foto">
         </div>
         <small>nome {{ n }}</small>
-      </div>
+      </button>
     </div>
     <div class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center">
       <button @click="scrollLeft()" class="btn btn-light my-auto text-dark shadow">
@@ -68,6 +68,9 @@ export default {
     scrollLeft () {
       const storiesScrollArea = document.getElementById("stories-scroll-area");
       storiesScrollArea.scroll({ left: storiesScrollArea.scrollLeft - storiesScrollArea.offsetWidth - 100, behavior: 'smooth' })
+    },
+    viewStorie (index) {
+      this.$router.push(`/stories/${index}`)
     }
   },
 };
