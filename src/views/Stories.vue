@@ -16,6 +16,12 @@
                 ></div>
               </div>
             </div>
+            <div class="d-flex flex-row align-items-center text-light position-absolute profile-info-pos">
+              <img class="rounded-circle mr-2" src="https://img1.gratispng.com/20180623/vr/kisspng-computer-icons-avatar-social-media-blog-font-aweso-avatar-icon-5b2e99c3c1e473.3568135015297806757942.jpg" width="30" height="30" alt="Foto">
+              <div class="">
+                <h6 class="mb-0">Nome {{ storyId }}</h6>
+              </div>
+            </div>
             <div class="d-flex flex-row align-items-center h-100">
               <div class="flex-fill"
                 v-for="n in count"
@@ -68,7 +74,10 @@
   padding: 15px 0;
   cursor: pointer;
 }
-
+.profile-info-pos{
+  top: 25px;
+  left: 15px;
+}
 .progress {
   height: 3px;
   flex-grow: 1;
@@ -129,6 +138,8 @@
 // import Stories from "@/components/Stories.vue";
 // import Post from "@/components/Post.vue";
 
+let nextStoryInterval
+
 const defaultConfigs = () => {
   return {
     story: 1, // Número do story
@@ -168,11 +179,25 @@ export default {
 
       this.count = this.storyId % 4 + 1;
 
+      console.log('RESET STORY TIME COUNT');
+
+      clearInterval(nextStoryInterval)
       // TODO: Cancelar carregamento de imagens ao trocar de rota!
     }
   },
+  destroyed () {
+    clearInterval(nextStoryInterval)
+  },
   methods: {
+    resetStoryTimer () {
+      clearInterval(nextStoryInterval);
+      nextStoryInterval = setInterval(() => {
+        this.nextStory()
+      }, this.vtime)
+    },
     nextStory () {
+      this.resetStoryTimer()
+
       if(this.hasMoreStories.next){
         this.story++
       } else {
@@ -180,6 +205,8 @@ export default {
       }
     },
     prevStory () {
+      this.resetStoryTimer()
+
       if (this.hasMoreStories.prev) {
         this.story--
       } else {
@@ -204,6 +231,8 @@ export default {
     },
     startTimeCount () {
       this.vtime_started = true
+
+      this.resetStoryTimer()
     },
     pauseTimeCount () {
 
