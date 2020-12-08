@@ -14,7 +14,12 @@
       </header>
       <!-- Mídia que foi publicada -->
       <section class="post-image-container">
-        <img :data-src="`https://picsum.photos/800/800?random=${imageId}`" :class="imageLoading ? 'loadingImage' : 'loadedImage'" class="lazyload" @load='imageLoaded()' @error="imageLoadError()" width="100%" alt="Foto">
+        <img :data-src="`https://picsum.photos/800/800?random=${imageId}`" :class="imageLoading ? 'loadingImage' : 'loadedImage'" class="lazyload" @load='imageLoaded()' @error="imageLoadError()" width="100%" alt="Foto" v-if="!imageLoaderror">
+        <div class="text-center d-flex align-items-center justify-content-center w-100" v-else>
+          <div>
+            <i class="fas fa-times"></i> Não foi possível carregar esta imagem.
+          </div>
+        </div>
       </section>
       <footer class="py-2 px-3">
         <!-- Botões de curtir, comentar, compartilhar e salvar -->
@@ -68,10 +73,15 @@
     animation: AnimationName 2s ease infinite;
 }
 .post-image-container > img {
-  filter: blur(5px);
+  /* filter: blur(5px); */
   opacity: 0;
   position: absolute;
   top: 0;
+}
+.post-image-container > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 @-webkit-keyframes AnimationName {
     0%{background-position:0% 50%}
@@ -96,14 +106,14 @@
 @keyframes fadeIn{
   0%{
     opacity: 0;
-    filter: blur(5px);
+    /* filter: blur(5px); */
   }
-  60%{
+  /* 60%{
     filter: blur(5px);
-  }
+  } */
   100%{
     opacity: 1;
-    filter: blur(0px);
+    /* filter: blur(0px); */
   }
 }
 
@@ -127,9 +137,11 @@ export default {
   methods: {
     imageLoaded () {
       this.imageLoading = false
+      this.imageLoadError = false
     },
     imageLoadError () {
-      this.imageLoadError = true
+      this.imageLoading = false
+      this.imageLoaderror = true
     }
   },
 };
