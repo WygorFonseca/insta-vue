@@ -8,12 +8,12 @@
         <small>nome {{ n }}</small>
       </button>
     </div>
-    <div class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center">
+    <div v-if="$appDevice != 'mobile'" class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center">
       <button @click="scrollLeft()" class="btn btn-light my-auto text-dark shadow">
         <i class="fas fa-chevron-left"></i>
       </button>
     </div>
-    <div class="floating-story-btn-container f-story-btn-right d-flex flex-row align-items-center">
+    <div v-if="$appDevice != 'mobile'" class="floating-story-btn-container f-story-btn-right d-flex flex-row align-items-center">
       <button @click="scrollRight()" class="btn btn-light my-auto text-dark shadow">
         <i class="fas fa-chevron-right"></i>
       </button>

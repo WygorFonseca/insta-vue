@@ -5,7 +5,6 @@
         <div class="col d-none d-sm-block"></div>
         <div class="p-0 rounded-075 col-lg-3" style="background: #000">
           <div class="h-100 text-center">
-            <div>{{ images[story] }}</div>
             <div class="pause w-100">
               <div class="progress-container px-2 w-100"  :key="'progress_' + storyId + story">
                 <div
@@ -18,15 +17,23 @@
               </div>
             </div>
             <div class="d-flex flex-row align-items-center h-100">
-              <img
+              <div class="flex-fill"
                 v-for="n in count"
                 :key="storyId + n"
-                :src="`https://picsum.photos/800/1400?ramdon=${parseInt(storyId) + (n * storyId)}`"
                 v-show="n == story"
-                @load="storyImageLoad(n, storyId)"
-                @error="storyImageError(n, storyId)"
-                width="100%" max-height="100%" alt="Story" class="rounded-075"
               >
+                <i v-if="!imagesLoaded.includes(n) && !imagesError.includes(n)" class="fas fa-spinner fa-spin text-light fa-lg flex-fill"></i>
+                <div v-else-if="imagesError.includes(n) && !imagesLoaded.includes(n)" class="text-danger col-8 mx-auto">
+                  <i class="fas fa-times fa-lg flex-fill mr-2"></i> Não foi possível carregar este story
+                </div>
+                <img
+                  :src="`https://picsum.photos/800/1400?ramdon=${parseInt(storyId) + (n * storyId)}`"
+                  @load="storyImageLoad(n, storyId)"
+                  @error="storyImageError(n, storyId)"
+                  v-show="imagesLoaded.includes(n)"
+                  width="100%" max-height="100%" alt="Story" class="rounded-075"
+                >
+              </div>
             </div>
             <div class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center">
               <button @click="prevStory()" class="btn btn-light my-auto text-dark shadow rounded-circle">
@@ -129,7 +136,8 @@ const defaultConfigs = () => {
     loaded: 0,
     vtime: 5000, // Tempo de visualização
     vtime_started: false, // Se o tempo de visualização já está sendo contado
-    images: []
+    imagesLoaded: [],
+    imagesError: []
   }
 }
 
@@ -142,6 +150,12 @@ export default {
   mounted () {
     if(document.fullscreenEnabled){
       if(this.$appDevice == "mobile") document.body.requestFullscreen()
+      document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+          // fullscreen is canceled
+          this.$router.replace('/')
+        }
+      });
     }
   },
   watch: {
@@ -181,10 +195,12 @@ export default {
     storyImageError (image, storyId) {
       if(image == 1 && storyId == this.storyId) this.startTimeCount()
       console.log("Image Error", image);
+      this.imagesError.push(image)
     },
     storyImageLoad (image, storyId) {
       if(image == 1 && storyId == this.storyId) this.startTimeCount()
       console.log("Image Loaded", image);
+      this.imagesLoaded.push(image)
     },
     startTimeCount () {
       this.vtime_started = true

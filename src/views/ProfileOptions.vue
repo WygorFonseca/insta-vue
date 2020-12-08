@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <nav class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom border-gray">
-      <button class="btn">
+      <button @click="$router.go(-1)" class="btn">
         <i class="fas fa-times fa-lg"></i>
       </button>
       <a href="#" class="col-xs-4 p-0 navbar-brand">
