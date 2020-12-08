@@ -5,7 +5,7 @@
       <div class="row mb-3">
         <div class="col-sm-12 col-md-8 col-lg-7 col-12">
           <Stories />
-          <Post class="mt-3" v-for="n in 10" :key="n" />
+          <Post class="mt-3" v-for="n in 25" :key="n" />
         </div>
         <div class="col-md-4 col-lg-5 d-none d-sm-block">
           <h6 class="bg-white border border-gray rounded px-3 py-3 mb-2">Sobre o insta-vue</h6>

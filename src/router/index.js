@@ -83,6 +83,8 @@ router.beforeEach((to, from, next) => {
     // Verifica se esta autenticado através do estado da aplicação
     if(store.state.user != null) return true;
 
+    console.log("NÂO AUTENTICADO VIA STORE");
+
     // Verifica se esta autenticado através do localStorage e seta o estado
     const authUserInfo = localStorage.getItem("auth_user")
 

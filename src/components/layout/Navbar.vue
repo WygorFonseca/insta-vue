@@ -10,21 +10,23 @@
       <button class="btn btn-sm" v-if="$appDevice == 'mobile'">
         <i class="fas fa-lg fa-paper-plane"></i>
       </button>
-      <div class="d-none d-sm-block w-100">
-        <form class="form-inline mx-auto w-50 px-5">
-          <v-select class="w-100" size="sm" placeholder="Pesquisar" :options="searchOptions">
-            <template v-slot:option="option">
-              <div class="d-flex flex-row align-items-center">
-                <img src="../../assets/wygor.jpg" class="rounded-circle" width="40" alt="">
-                <div class="ml-2">
-                  <h6 class="mb-0">{{ option.label }}</h6>
-                  <small>Desenvolvedor</small>
+      <div class="d-none d-sm-block w-100 col-7 col-md-5">
+        <!-- <form class="form-inline w-100 px-5">
+          <div class="w-100">
+            <v-select id="v-select-srch" class="v-select-search w-100" :class="selectedSearchOption ? 'vs--selected' : ''" size="sm" :options="searchOptions" v-model="selectedSearchOption">
+              <template v-slot:option="option">
+                <div class="d-flex flex-row align-items-center">
+                  <img src="../../assets/wygor.jpg" class="rounded-circle" width="40" alt="">
+                  <div class="ml-2">
+                    <h6 class="mb-0">{{ option.label }}</h6>
+                    <small>Desenvolvedor</small>
+                  </div>
                 </div>
-              </div>
-            </template>
-          </v-select>
-          <!-- <input type="text" class="col-xs-4 form-control form-control-sm p-0 px-3" placeholder="Pesquisar"> -->
-        </form>
+              </template>
+            </v-select>
+            <label class="vssr" for="v-select-srch">Teste</label>
+          </div>
+        </form> -->
       </div>
       <ul class=" col-xs-4 navbar-nav" v-if="$appDevice == 'desktop'">
         <li class="nav-item">
@@ -57,7 +59,7 @@
               <i style="width: 20px" class="fas fa-sync"></i> <small>Trocar de conta</small>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item pl-3 pr-5 mr-5 py-2" href="#">
+            <a class="dropdown-item pl-3 pr-5 mr-5 py-2" @click="logout()">
               <small>Sair</small>
             </a>
           </div>
@@ -68,6 +70,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: "Navbar",
   data () {
@@ -76,8 +80,52 @@ export default {
         { code: 1, label: "Wygor Fonseca" },
         { code: 1, label: "Dev FullStack" },
         { code: 1, label: "Dev" },
-      ]
+      ],
+      selectedSearchOption: null
+    }
+  },
+  methods: {
+    ...mapMutations(["USER_SET_STATE"]),
+    logout () {
+      this.USER_SET_STATE(null)
+
+      localStorage.removeItem("auth_user")
+
+      this.$router.replace('/login')
     }
   }
 }
 </script>
+
+<style>
+/* input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label{
+  top: 8px;
+  bottom: 10px;
+  left: 20px;
+  font-size: 11px;
+  opacity: 1;
+}
+
+.inputText {
+  font-size: 14px;
+  width: 200px;
+  height: 35px;
+}
+
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 20px;
+  top: 18px;
+  transition: 0.2s ease all;
+} */
+/* #v-select-srch {
+  transform: scale(0.75) translateY(-100%) translateX(-30px);
+} */
+
+/* .vs__search:focus + label {
+  top: -100% !important;
+  margin-bottom: 16px !important;
+} */
+</style>

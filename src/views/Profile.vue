@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <Navbar class="mb-3" />
-    <div class="container">
+    <div class="container col-12 col-md-7 col-lg-8 p-0">
       <div class="px-3">
         <header class="d-flex flex-row align-items-center">
-          <img src="../assets/wygor.jpg" width="80" class="rounded-circle" alt="Foto de perfil">
+          <img src="https://www.shareicon.net/data/512x512/2016/09/01/822711_user_512x512.png" width="80" class="rounded-circle" alt="Foto de perfil">
           <div class="ml-2">
-            <h5>Wygor Fonseca <i class="fas text-info fa-check-circle"></i></h5>
+            <h5>Seu perfil <i class="fas text-info fa-check-circle"></i></h5>
             <button class="btn py-0 px-3 bg-white border-secondary">
               <small>Enviar mensagem</small>
             </button>
@@ -34,18 +34,18 @@
           <p class="mb-0 text-muted"><small>Seguindo</small></p>
         </div>
       </section>
-      <div class="row">
-        <div class="col-4 p-01 p-0" v-for="n in 15" :key="n">
-          <img :src="`https://picsum.photos/id/${n+210}/200/200`" width="100%" alt="a">
+      <div class="row no-gutters">
+        <div class="col-4 p-01" v-for="n in 15" :key="n">
+          <img :src="`https://picsum.photos/id/${n+210}/1200/1200`" width="100%" alt="a">
         </div>
-        <div class="col-4 p-01 p-0">
-          <img src="https://picsum.photos/id/40/200/200" width="100%" alt="a">
+        <div class="col-4 p-01">
+          <img src="https://picsum.photos/id/40/1200/1200" width="100%" alt="a">
         </div>
-        <div class="col-4 p-01 p-0">
-          <img src="https://picsum.photos/id/864/200/200" width="100%" alt="a">
+        <div class="col-4 p-01">
+          <img src="https://picsum.photos/id/864/1200/1200" width="100%" alt="a">
         </div>
-        <div class="col-4 p-01 p-0">
-          <img src="https://picsum.photos/id/648/200/200" width="100%" alt="a">
+        <div class="col-4 p-01">
+          <img src="https://picsum.photos/id/648/1200/1200" width="100%" alt="a">
         </div>
       </div>
     </div>

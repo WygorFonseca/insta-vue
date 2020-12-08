@@ -17,7 +17,7 @@
       </li>
       <li class="nav-item">
         <router-link to="/profile" class="nav-link" style="padding-top: 5px">
-          <img src="../../assets/wygor.jpg" width="25" class="rounded-circle" alt="f">
+          <img src="https://www.shareicon.net/data/512x512/2016/09/01/822711_user_512x512.png" width="25" class="rounded-circle" alt="f">
         </router-link>
       </li>
     </ul>

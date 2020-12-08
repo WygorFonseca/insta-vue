@@ -21,14 +21,14 @@
               <img
                 v-for="n in count"
                 :key="storyId + n"
-                :src="`https://picsum.photos/800/1400?ramdon=${parseInt(storyId) + 100 + n}`"
+                :src="`https://picsum.photos/800/1400?ramdon=${parseInt(storyId) + (n * storyId)}`"
                 v-show="n == story"
-                @load="storyImageLoad(n)"
-                @error="storyImageError(n)"
+                @load="storyImageLoad(n, storyId)"
+                @error="storyImageError(n, storyId)"
                 width="100%" max-height="100%" alt="Story" class="rounded-075"
               >
             </div>
-            <div :class="hasPrevStory ? 'd-flex' : 'd-none'" class="floating-story-btn-container f-story-btn-left flex-row align-items-center">
+            <div class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center">
               <button @click="prevStory()" class="btn btn-light my-auto text-dark shadow rounded-circle">
                 <i class="fas fa-chevron-left"></i>
               </button>
@@ -100,11 +100,15 @@
   position: absolute;
   margin: auto;
 }
+.f-story-btn-left > button, .f-story-btn-right > button {
+  width: 35px;
+  height: 35px;
+}
 .f-story-btn-left {
-  left: 5px;
+  left: 15px;
 }
 .f-story-btn-right {
-  right: 5px;
+  right: 15px;
 }
 .rounded-075 {
   border-radius: 0.75em;
@@ -118,85 +122,139 @@
 // import Stories from "@/components/Stories.vue";
 // import Post from "@/components/Post.vue";
 
-let nextStoryInterval
+const defaultConfigs = () => {
+  return {
+    story: 1, // Número do story
+    count: 2, // Quantidade de stories
+    loaded: 0,
+    vtime: 5000, // Tempo de visualização
+    vtime_started: false, // Se o tempo de visualização já está sendo contado
+    images: []
+  }
+}
 
 export default {
   name: "Stories",
   props: ['storyId'],
   data () {
-    return {
-      story: 1, // Número do stori
-      count: 2, // Quantidade de stories
-      loaded: 0,
-      vtime: 5000, // Tempo de visualização
-      vtime_started: false, // Se o tempo de visualização já está sendo contado
-      images: []
+    return defaultConfigs()
+  },
+  mounted () {
+    if(document.fullscreenEnabled){
+      if(this.$appDevice == "mobile") document.body.requestFullscreen()
     }
   },
   watch: {
     '$route': function (){
-      this.count = parseInt(this.storyId) % 4 + 1
-      this.resetStories();
+      const defaultConf = defaultConfigs();
+
+      Object.keys(defaultConf).forEach(el => {
+        this[el] = defaultConf[el]
+      })
+
+      this.count = this.storyId % 4 + 1;
+
+      // TODO: Cancelar carregamento de imagens ao trocar de rota!
     }
   },
   methods: {
-    resetStories () {
-      this.story = 1;
-      this.loaded = 0
-      this.vtime_started = false;
-      clearInterval(nextStoryInterval);
+    nextStory () {
+      if(this.hasMoreStories.next){
+        this.story++
+      } else {
+        this.nextStoryPage()
+      }
     },
     prevStory () {
-
-    },
-    nextStory () {
-      clearInterval(nextStoryInterval)
-      nextStoryInterval = setInterval(() => {
-        this.nextStory()
-      }, this.vtime)
-
-      if(this.story == this.count){
-        this.resetStories()  
-        clearInterval(nextStoryInterval);
-        this.$router.push(`/stories/${parseInt(this.storyId) + 1}`)
-        return;
+      if (this.hasMoreStories.prev) {
+        this.story--
+      } else {
+        this.prevStoryPage()
       }
-      // } else if (this.story + 1 != this.count && this.story + 1 != this.count) {
-      //   this.startViewCount()
-      // } else {
-
-      // }
-
-      this.story++;
     },
-    storyImageError (image) {
-      console.error(image);
-      this.loaded++
-      // if(this.loaded == this.count) this.startViewCount()
-      if(!this.vtime_started) this.startViewCount()
+    nextStoryPage () {
+      this.$router.replace(`/stories/${parseInt(this.storyId) + 1}`)
     },
-    storyImageLoad (image) {
-      console.log(image);
-      this.loaded++
-      // if(this.loaded == this.count) this.startViewCount()
-      if(!this.vtime_started) this.startViewCount()
-      // if(image == 1) this.startViewCount()
+    prevStoryPage () {
+      this.$router.replace(`/stories/${this.storyId != 1 ? (parseInt(this.storyId) - 1) : 50}`)
     },
-    startViewCount () {
-      // alert(1)
-      console.log("aa", this.storyId, this.story, this.vtime_started)
-      // Inicia o timeout para mudar de story
-      this.vtime_started = true;
+    storyImageError (image, storyId) {
+      if(image == 1 && storyId == this.storyId) this.startTimeCount()
+      console.log("Image Error", image);
+    },
+    storyImageLoad (image, storyId) {
+      if(image == 1 && storyId == this.storyId) this.startTimeCount()
+      console.log("Image Loaded", image);
+    },
+    startTimeCount () {
+      this.vtime_started = true
+    },
+    pauseTimeCount () {
 
-      nextStoryInterval = setInterval(() => {
-        this.nextStory()
-      }, this.vtime)
-    }
+    },
+    // resetStories () {
+    //   this.story = 1;
+    //   this.loaded = 0
+    //   this.vtime_started = false;
+    //   clearInterval(nextStoryInterval);
+    // },
+    // prevStory () {
+
+    // },
+    // nextStory () {
+    //   clearInterval(nextStoryInterval)
+    //   nextStoryInterval = setInterval(() => {
+    //     this.nextStory()
+    //   }, this.vtime)
+
+    //   if(this.story == this.count){
+    //     this.resetStories()  
+    //     clearInterval(nextStoryInterval);
+    //     this.$router.push(`/stories/${parseInt(this.storyId) + 1}`)
+    //     return;
+    //   }
+    //   // } else if (this.story + 1 != this.count && this.story + 1 != this.count) {
+    //   //   this.startViewCount()
+    //   // } else {
+
+    //   // }
+
+    //   this.story++;
+    // },
+    // storyImageError (image) {
+    //   console.error(image);
+    //   this.loaded++
+    //   // if(this.loaded == this.count) this.startViewCount()
+    //   if(!this.vtime_started) this.startViewCount()
+    // },
+    // storyImageLoad (image) {
+    //   console.log(image);
+    //   this.loaded++
+    //   // if(this.loaded == this.count) this.startViewCount()
+    //   if(!this.vtime_started) this.startViewCount()
+    //   // if(image == 1) this.startViewCount()
+    // },
+    // startViewCount () {
+    //   // alert(1)
+    //   console.log("aa", this.storyId, this.story, this.vtime_started)
+    //   // Inicia o timeout para mudar de story
+    //   this.vtime_started = true;
+
+    //   nextStoryInterval = setInterval(() => {
+    //     this.nextStory()
+    //   }, this.vtime)
+    // }
   },
   computed: {
-    hasPrevStory () {
-      return this.storyId > 0
+    hasMoreStories () {
+      return { 
+        next: this.story != this.count,
+        prev: this.story != 1,
+      }
     }
+    // hasPrevStory () {
+    //   return this.storyId > 0
+    // }
   }
   // components: { Navbar, Footer, Post, Stories }
 };

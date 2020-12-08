@@ -4,9 +4,9 @@
       <div class="col-9 col-md-6 col-lg-4 text-center">
         <img src="../assets/logo-instagram.png" alt="logo" width="180">
         <div class="mt-5">
-          <button class="btn btn-primary btn-sm w-100">
+          <!-- <button class="btn btn-primary btn-sm w-100">
             <i class="fab fa-facebook mr-1"></i> Continuar com o facebook
-          </button>
+          </button> -->
         </div>
         <div class="row my-3">
           <div class="col-5"><hr /></div>
@@ -17,13 +17,19 @@
         </div>
         <form class="mb-4">
           <div class="form-group">
-            <input type="text" class="form-control bg-light-2" v-model="username" placeholder="Nome de usuário">
+            <input type="text" class="form-control bg-light-2" :class="formError.email ? 'is-invalid' : ''" id="input-username" aria-describedby="input-username" v-model="username" placeholder="E-mail">
+            <div id="input-username" class="invalid-feedback text-left">
+              {{ formError.email }}
+            </div>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control bg-light-2" v-model="password" placeholder="Senha">
+            <input type="password" class="form-control bg-light-2" :class="formError.password ? 'is-invalid' : ''" id="input-password" aria-describedby="input-password"  v-model="password" placeholder="Senha">
+            <div id="input-password" class="invalid-feedback text-left">
+              {{ formError.password }}
+            </div>
           </div>
           <div class="text-right">
-            <a href="">
+            <a href="#" class="disabled">
               Esqueceu sua senha?
             </a>
           </div>
@@ -68,6 +74,18 @@ export default {
         "auth/weak-password": {
           field: 'password',
           message: "A senha informada deve conter no mínimo 6 caractéres"
+        },
+        "auth/user-not-found": {
+          field: 'email',
+          message: "Usuário não encontrado."
+        },
+        "auth/wrong-password": {
+          field: 'password',
+          message: "A Senha está incorreta."
+        },
+        "auth/too-many-requests": {
+          field: 'email',
+          message: "Acesso bloqueado por muitas tentativas. Tente-novamente mais tarde."
         }
       },
       isLoadingLogin: false,
@@ -77,6 +95,8 @@ export default {
     ...mapMutations(["USER_SET_STATE"]),
     doLogin () {
       this.isLoadingLogin = true
+      this.formError.email = ''
+      this.formError.password = ''
 
       this.$fireBase.auth().signInWithEmailAndPassword(this.username, this.password)
       .then(({ user }) => {
@@ -91,11 +111,19 @@ export default {
         this.USER_SET_STATE(userInfo)
 
         localStorage.setItem("auth_user", JSON.stringify(userInfo))
+
+        this.$router.replace('/')
       })
-      .catch(function (error) {
+      .catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+
+        if(this.errorMessages[errorCode]){
+          this.formError[this.errorMessages[errorCode].field] = this.errorMessages[errorCode].message
+        }else{
+          this.formError.email = errorMessage
+        }
         
         console.log(errorCode, errorMessage);
       })

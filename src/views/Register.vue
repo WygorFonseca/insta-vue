@@ -12,7 +12,7 @@
         </div>
         <form class="mb-4">
           <div class="form-group">
-            <input type="text" class="form-control bg-light-2" :class="formError.email ? 'is-invalid' : ''" id="input-username" aria-describedby="input-username" v-model="username" placeholder="Nome de usuário">
+            <input type="text" class="form-control bg-light-2" :class="formError.email ? 'is-invalid' : ''" id="input-username" aria-describedby="input-username" v-model="username" placeholder="E-mail">
             <div id="input-username" class="invalid-feedback text-left">
               {{ formError.email }}
             </div>
@@ -64,6 +64,10 @@ export default {
         "auth/weak-password": {
           field: 'password',
           message: "A senha informada deve conter no mínimo 6 caractéres"
+        },
+        "auth/email-already-in-use": {
+          field: 'email',
+          message: "Este e-mail já está em uso."
         }
       },
       isLoadingRegister: false,
@@ -90,13 +94,15 @@ export default {
 
         localStorage.setItem("auth_user", JSON.stringify(userInfo))
 
-        this.$router.push('/')
+        this.$router.replace('/')
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         if(this.errorMessages[errorCode]){
           this.formError[this.errorMessages[errorCode].field] = this.errorMessages[errorCode].message
+        }else{
+          this.formError.email = errorMessage
         }
         console.log(errorMessage);
         console.log(error, errorCode, errorMessage);

@@ -14,7 +14,7 @@
       </header>
       <!-- Mídia que foi publicada -->
       <section class="post-image-container">
-        <img :data-src="`https://picsum.photos/id/${imageId}/800/800`" :class="imageLoading ? 'loadingImage' : 'loadedImage'" class="lazyload" @load='imageLoaded()' @error="imageLoadError()" width="100%" alt="Foto">
+        <img :data-src="`https://picsum.photos/800/800?random=${imageId}`" :class="imageLoading ? 'loadingImage' : 'loadedImage'" class="lazyload" @load='imageLoaded()' @error="imageLoadError()" width="100%" alt="Foto">
       </section>
       <footer class="py-2 px-3">
         <!-- Botões de curtir, comentar, compartilhar e salvar -->
@@ -22,7 +22,7 @@
           <div class="flex-fill">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button @click="isLiked = !isLiked" type="button" class="btn p-0 mr-3">
-                <i class="fa-lg fa-heart" :class="isLiked ? 'fas text-danger' : 'far'"></i>
+                <i class="fa-lg fa-heart" :class="isLiked ? 'fas text-danger heart-pulse' : 'far'"></i>
               </button>
               <button type="button" class="btn p-0 mr-3"><i class="far fa-lg fa-comment"></i></button>
               <button type="button" class="btn p-0"><i class="far fa-lg fa-paper-plane"></i></button>
