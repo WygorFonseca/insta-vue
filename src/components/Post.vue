@@ -65,12 +65,12 @@
   /* height: 100vw; */
   position: relative;
   padding-top: 100%;
-  background: linear-gradient(270deg, #f3f3f3, #e1e1e1);
-    background-size: 400% 400%;
+  background: linear-gradient(to right, #fafafa 8%, #e8e8e8 38%, #fafafa 54%);
+  background-size: 400% 400%;
 
-    -webkit-animation: AnimationName 2s ease infinite;
-    -moz-animation: AnimationName 2s ease infinite;
-    animation: AnimationName 2s ease infinite;
+  -webkit-animation: AnimationName 2s ease infinite forwards;
+  -moz-animation: AnimationName 2s ease infinite forwards;
+  animation: AnimationName 2s ease infinite forwards;
 }
 .post-image-container > img {
   /* filter: blur(5px); */
