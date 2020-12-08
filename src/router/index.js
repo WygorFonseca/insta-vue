@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
+import ProfileOptions from "../views/ProfileOptions.vue";
 import Stories from "../views/Stories.vue";
 import store from "../store/index";
 
@@ -44,6 +45,14 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: "/profile/options",
+    name: "Profile Options",
+    component: ProfileOptions,
     meta: {
       auth: true
     }

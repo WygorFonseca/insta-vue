@@ -16,7 +16,7 @@
           </div>
         </header>
         <section class="mt-3">
-          <h6 class="mb-0">Wygor Fonseca</h6>
+          <h6 class="mb-0">Nome de usuário</h6>
           <small>Descrição do perfil...</small>
         </section>
       </div>

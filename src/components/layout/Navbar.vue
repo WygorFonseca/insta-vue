@@ -1,11 +1,15 @@
 <template>
   <nav class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom border-gray">
     <div class="container px-sm-5">
-      <button class="btn btn-sm" v-if="$appDevice == 'mobile'">
-        <i class="fas fa-lg fa-camera"></i>
-      </button>
+      <router-link tag="button" :to="$route.name != 'Profile' ? '/camera' : '/profile/options'" class="btn btn-sm" v-if="$appDevice == 'mobile'">
+        <i v-if="$route.name != 'Profile'" class="fas fa-lg fa-camera"></i>
+        <i v-else class="fas fa-lg fa-cog"></i>
+      </router-link>
       <a href="#" class="col-xs-4 p-0 navbar-brand">
-        <img src="@/assets/logo-instagram.png" alt="Instagram" width="100">
+        <img src="@/assets/logo-instagram.png" alt="Instagram" width="100" v-if="$route.name != 'Profile'">
+        <h6 class="mb-0" v-else>
+          {{ $store.state.user.email }}
+        </h6>
       </a>
       <button class="btn btn-sm" v-if="$appDevice == 'mobile'">
         <i class="fas fa-lg fa-paper-plane"></i>
