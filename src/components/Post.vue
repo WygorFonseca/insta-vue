@@ -13,7 +13,11 @@
         <h6 class="mb-0">{{ user.name }}</h6>
         <small>{{ user.description }} </small>
       </div>
-      <button class="btn btn-sm px-0">
+      <button
+        class="btn btn-sm px-0"
+        data-toggle="modal"
+        data-target="#postOptions"
+      >
         <i class="fas fa-ellipsis-h"></i>
       </button>
     </header>
@@ -65,8 +69,8 @@
             </button>
           </div>
         </div>
-        <button class="btn p-0">
-          <i class="far fa-bookmark fa-lg"></i>
+        <button class="btn p-0" @click="isSaved = !isSaved">
+          <i class="fa-bookmark fa-lg" :class="isSaved ? 'fas' : 'far'"></i>
         </button>
       </div>
       <!-- Quem curtiu -->
@@ -126,6 +130,66 @@
         </button>
       </div>
     </div>
+
+    <!-- Opções da postagem -->
+    <div
+      class="modal fade"
+      id="postOptions"
+      tabindex="-1"
+      aria-labelledby="postOptionsLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+          <div class="modal-body p-0">
+            <div class="list-group text-center">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action text-danger"
+              >
+                <strong>Denunciar</strong>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action text-danger "
+              >
+                <strong>Deixar de seguir</strong>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action disabled"
+              >
+                Ir para a publicação
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action disabled"
+              >
+                Compartilhar em
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action disabled"
+              >
+                Copiar link
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action disabled"
+              >
+                Incorporar
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action disabled"
+              >
+                Cancelar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </article>
 </template>
 
@@ -143,6 +207,7 @@ export default {
       imageLoading: true,
       imageLoaderror: false,
       isLiked: false,
+      isSaved: false,
       comment: "",
       comments: [
         {

@@ -96,8 +96,8 @@
               </button>
             </div>
           </div>
-          <button class="btn p-0">
-            <i class="far fa-bookmark fa-lg"></i>
+          <button class="btn p-0" @click="isSaved = !isSaved">
+            <i class="fa-bookmark fa-lg" :class="isSaved ? 'fas' : 'far'"></i>
           </button>
         </div>
         <!-- Quem curtiu -->
@@ -153,6 +153,7 @@ export default {
       imageLoading: true,
       imageLoaderror: false,
       isLiked: false,
+      isSaved: false,
       comment: "",
       comments: [
         {
