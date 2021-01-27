@@ -6,48 +6,93 @@
         <div class="p-0 rounded-075 col-lg-3" style="background: #000">
           <div class="h-100 text-center">
             <div class="pause w-100">
-              <div class="progress-container px-2 w-100"  :key="'progress_' + storyId + story">
+              <div
+                class="progress-container px-2 w-100"
+                :key="'progress_' + storyId + story"
+              >
                 <div
                   v-for="n in count"
                   :style="`animation-duration: ${vtime}ms`"
-                  :class="story == n ? (vtime_started ? 'active' : '') : (story > n ? 'passed' : '')"
+                  :class="
+                    story == n
+                      ? vtime_started
+                        ? 'active'
+                        : ''
+                      : story > n
+                      ? 'passed'
+                      : ''
+                  "
                   :key="'storyprogress_' + storyId + n"
                   class="progress"
                 ></div>
               </div>
             </div>
-            <div class="d-flex flex-row align-items-center text-light position-absolute profile-info-pos">
-              <img class="rounded-circle mr-2" src="https://img1.gratispng.com/20180623/vr/kisspng-computer-icons-avatar-social-media-blog-font-aweso-avatar-icon-5b2e99c3c1e473.3568135015297806757942.jpg" width="30" height="30" alt="Foto">
+            <div
+              class="d-flex flex-row align-items-center text-light position-absolute profile-info-pos"
+            >
+              <img
+                class="rounded-circle mr-2"
+                src="https://img1.gratispng.com/20180623/vr/kisspng-computer-icons-avatar-social-media-blog-font-aweso-avatar-icon-5b2e99c3c1e473.3568135015297806757942.jpg"
+                width="30"
+                height="30"
+                alt="Foto"
+              />
               <div class="">
                 <h6 class="mb-0">Nome {{ storyId }}</h6>
               </div>
             </div>
             <div class="d-flex flex-row align-items-center h-100">
-              <div class="flex-fill"
+              <div
+                class="flex-fill"
                 v-for="n in count"
                 :key="storyId + n"
                 v-show="n == story"
               >
-                <i v-if="!imagesLoaded.includes(n) && !imagesError.includes(n)" class="fas fa-spinner fa-spin text-light fa-lg flex-fill"></i>
-                <div v-else-if="imagesError.includes(n) && !imagesLoaded.includes(n)" class="text-danger col-8 mx-auto">
-                  <i class="fas fa-times fa-lg flex-fill mr-2"></i> Não foi possível carregar este story
+                <i
+                  v-if="!imagesLoaded.includes(n) && !imagesError.includes(n)"
+                  class="fas fa-spinner fa-spin text-light fa-lg flex-fill"
+                ></i>
+                <div
+                  v-else-if="
+                    imagesError.includes(n) && !imagesLoaded.includes(n)
+                  "
+                  class="text-danger col-8 mx-auto"
+                >
+                  <i class="fas fa-times fa-lg flex-fill mr-2"></i> Não foi
+                  possível carregar este story
                 </div>
                 <img
-                  :src="`https://picsum.photos/800/1400?ramdon=${parseInt(storyId) + (n * storyId)}`"
+                  :src="
+                    `https://picsum.photos/800/1400?ramdon=${parseInt(storyId) +
+                      n * storyId}`
+                  "
                   @load="storyImageLoad(n, storyId)"
                   @error="storyImageError(n, storyId)"
                   v-show="imagesLoaded.includes(n)"
-                  width="100%" max-height="100%" alt="Story" class="rounded-075"
-                >
+                  width="100%"
+                  max-height="100%"
+                  alt="Story"
+                  class="rounded-075"
+                />
               </div>
             </div>
-            <div class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center">
-              <button @click="prevStory()" class="btn btn-light my-auto text-dark shadow rounded-circle">
+            <div
+              class="floating-story-btn-container f-story-btn-left d-flex flex-row align-items-center"
+            >
+              <button
+                @click="prevStory()"
+                class="btn btn-light my-auto text-dark shadow rounded-circle"
+              >
                 <i class="fas fa-chevron-left"></i>
               </button>
             </div>
-            <div class="floating-story-btn-container f-story-btn-right d-flex flex-row align-items-center">
-              <button @click="nextStory()" class="btn btn-light my-auto text-dark shadow rounded-circle">
+            <div
+              class="floating-story-btn-container f-story-btn-right d-flex flex-row align-items-center"
+            >
+              <button
+                @click="nextStory()"
+                class="btn btn-light my-auto text-dark shadow rounded-circle"
+              >
                 <i class="fas fa-chevron-right"></i>
               </button>
             </div>
@@ -74,7 +119,7 @@
   padding: 15px 0;
   cursor: pointer;
 }
-.profile-info-pos{
+.profile-info-pos {
   top: 25px;
   left: 15px;
 }
@@ -84,18 +129,19 @@
   border-radius: 4px;
   margin: 0 5px;
   display: flex;
-  background-image: -webkit-linear-gradient(left, 
-    rgba(255,255,255,.5) 0%,
-    rgba(255,255,255,.5) 50%,
-    rgba(88, 89, 104,.5) 50.001%,
-    rgba(88, 89, 104,.5) 100%
+  background-image: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(88, 89, 104, 0.5) 50.001%,
+    rgba(88, 89, 104, 0.5) 100%
   );
   background-repeat: no-repeat;
   background-size: 200%;
   background-color: #666;
   background-position: 100% 50%;
   animation-timing-function: linear;
-  animation-delay: .2s;
+  animation-delay: 0.2s;
 }
 
 .progress.active {
@@ -103,20 +149,25 @@
 }
 
 .progress.passed {
-    background-position: 0 0; 
+  background-position: 0 0;
 }
 
 @keyframes Loader {
-  0%   { background-position: 100% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
-.floating-story-btn-container{
+.floating-story-btn-container {
   top: 0;
   bottom: 0;
   position: absolute;
   margin: auto;
 }
-.f-story-btn-left > button, .f-story-btn-right > button {
+.f-story-btn-left > button,
+.f-story-btn-right > button {
   width: 35px;
   height: 35px;
 }
@@ -138,7 +189,7 @@
 // import Stories from "@/components/Stories.vue";
 // import Post from "@/components/Post.vue";
 
-let nextStoryInterval
+let nextStoryInterval;
 
 const defaultConfigs = () => {
   return {
@@ -149,94 +200,94 @@ const defaultConfigs = () => {
     vtime_started: false, // Se o tempo de visualização já está sendo contado
     imagesLoaded: [],
     imagesError: []
-  }
-}
+  };
+};
 
 export default {
   name: "Stories",
-  props: ['storyId'],
-  data () {
-    return defaultConfigs()
+  props: ["storyId"],
+  data() {
+    return defaultConfigs();
   },
-  mounted () {
-    if(document.fullscreenEnabled){
-      if(this.$appDevice == "mobile") document.body.requestFullscreen()
+  mounted() {
+    if (document.fullscreenEnabled) {
+      if (this.$appDevice == "mobile") document.body.requestFullscreen();
       document.addEventListener("fullscreenchange", () => {
         if (!document.fullscreenElement) {
           // fullscreen is canceled
-          this.$router.replace('/')
+          this.$router.replace("/");
         }
       });
     }
   },
   watch: {
-    '$route': function (){
+    $route: function() {
       const defaultConf = defaultConfigs();
 
       Object.keys(defaultConf).forEach(el => {
-        this[el] = defaultConf[el]
-      })
+        this[el] = defaultConf[el];
+      });
 
-      this.count = this.storyId % 4 + 1;
+      this.count = (this.storyId % 10) + 1;
 
-      console.log('RESET STORY TIME COUNT');
+      console.log("RESET STORY TIME COUNT");
 
-      clearInterval(nextStoryInterval)
+      clearInterval(nextStoryInterval);
       // TODO: Cancelar carregamento de imagens ao trocar de rota!
     }
   },
-  destroyed () {
-    clearInterval(nextStoryInterval)
+  destroyed() {
+    clearInterval(nextStoryInterval);
   },
   methods: {
-    resetStoryTimer () {
+    resetStoryTimer() {
       clearInterval(nextStoryInterval);
       nextStoryInterval = setInterval(() => {
-        this.nextStory()
-      }, this.vtime)
+        this.nextStory();
+      }, this.vtime + 60);
     },
-    nextStory () {
-      this.resetStoryTimer()
+    nextStory() {
+      this.resetStoryTimer();
 
-      if(this.hasMoreStories.next){
-        this.story++
+      if (this.hasMoreStories.next) {
+        this.story++;
       } else {
-        this.nextStoryPage()
+        this.nextStoryPage();
       }
     },
-    prevStory () {
-      this.resetStoryTimer()
+    prevStory() {
+      this.resetStoryTimer();
 
       if (this.hasMoreStories.prev) {
-        this.story--
+        this.story--;
       } else {
-        this.prevStoryPage()
+        this.prevStoryPage();
       }
     },
-    nextStoryPage () {
-      this.$router.replace(`/stories/${parseInt(this.storyId) + 1}`)
+    nextStoryPage() {
+      this.$router.replace(`/stories/${parseInt(this.storyId) + 1}`);
     },
-    prevStoryPage () {
-      this.$router.replace(`/stories/${this.storyId != 1 ? (parseInt(this.storyId) - 1) : 50}`)
+    prevStoryPage() {
+      this.$router.replace(
+        `/stories/${this.storyId != 1 ? parseInt(this.storyId) - 1 : 50}`
+      );
     },
-    storyImageError (image, storyId) {
-      if(image == 1 && storyId == this.storyId) this.startTimeCount()
+    storyImageError(image, storyId) {
+      if (image == 1 && storyId == this.storyId) this.startTimeCount();
       console.log("Image Error", image);
-      this.imagesError.push(image)
+      this.imagesError.push(image);
     },
-    storyImageLoad (image, storyId) {
-      if(image == 1 && storyId == this.storyId) this.startTimeCount()
+    storyImageLoad(image, storyId) {
+      if (image == 1 && storyId == this.storyId) this.startTimeCount();
       console.log("Image Loaded", image);
-      this.imagesLoaded.push(image)
+      this.imagesLoaded.push(image);
     },
-    startTimeCount () {
-      this.vtime_started = true
+    startTimeCount() {
+      this.vtime_started = true;
 
-      this.resetStoryTimer()
+      this.resetStoryTimer();
     },
-    pauseTimeCount () {
-
-    },
+    pauseTimeCount() {}
     // resetStories () {
     //   this.story = 1;
     //   this.loaded = 0
@@ -253,7 +304,7 @@ export default {
     //   }, this.vtime)
 
     //   if(this.story == this.count){
-    //     this.resetStories()  
+    //     this.resetStories()
     //     clearInterval(nextStoryInterval);
     //     this.$router.push(`/stories/${parseInt(this.storyId) + 1}`)
     //     return;
@@ -291,11 +342,11 @@ export default {
     // }
   },
   computed: {
-    hasMoreStories () {
-      return { 
+    hasMoreStories() {
+      return {
         next: this.story != this.count,
-        prev: this.story != 1,
-      }
+        prev: this.story != 1
+      };
     }
     // hasPrevStory () {
     //   return this.storyId > 0

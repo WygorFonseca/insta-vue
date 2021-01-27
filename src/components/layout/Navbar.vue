@@ -1,12 +1,24 @@
 <template>
-  <nav class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom border-gray">
+  <nav
+    class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom border-gray"
+  >
     <div class="container px-sm-5">
-      <router-link tag="button" :to="$route.name != 'Profile' ? '/camera' : '/profile/options'" class="btn btn-sm" v-if="$appDevice == 'mobile'">
+      <router-link
+        tag="button"
+        :to="$route.name != 'Profile' ? '/camera' : '/profile/options'"
+        class="btn btn-sm"
+        v-if="$appDevice == 'mobile'"
+      >
         <i v-if="$route.name != 'Profile'" class="fas fa-lg fa-camera"></i>
         <i v-else class="fas fa-lg fa-cog"></i>
       </router-link>
       <a href="#" class="col-xs-4 p-0 navbar-brand">
-        <img src="@/assets/logo-instagram.png" alt="Instagram" width="100" v-if="$route.name != 'Profile'">
+        <img
+          src="@/assets/logo-instagram.png"
+          alt="Instagram"
+          width="100"
+          v-if="$route.name != 'Profile'"
+        />
         <h6 class="mb-0" v-else>
           {{ $store.state.user.email }}
         </h6>
@@ -34,10 +46,14 @@
       </div>
       <ul class=" col-xs-4 navbar-nav" v-if="$appDevice == 'desktop'">
         <li class="nav-item">
-          <router-link to="/" class="nav-link"><i class="fas fa-lg fa-home"></i></router-link>
+          <router-link to="/" class="nav-link"
+            ><i class="fas fa-lg fa-home"></i
+          ></router-link>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link"><i class="fas fa-lg fa-paper-plane"></i></a>
+          <a href="#" class="nav-link"
+            ><i class="fas fa-lg fa-paper-plane"></i
+          ></a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link"><i class="fas fa-lg fa-compass"></i></a>
@@ -46,21 +62,47 @@
           <a href="#" class="nav-link"><i class="fas fa-lg fa-heart"></i></a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" style="padding-top: 5px" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="../../assets/wygor.jpg" width="23" class="rounded-circle" alt="f">
+          <a
+            class="nav-link"
+            style="padding-top: 5px"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img
+              src="../../assets/wygor.jpg"
+              width="23"
+              class="rounded-circle"
+              alt="f"
+            />
           </a>
-          <div class="dropdown-menu dropdown-menu-right shadow border-0 p-0 py-1" aria-labelledby="navbarDropdown">
-            <router-link to="/profile" class="dropdown-item pl-3 pr-5 mr-5 py-2">
-              <i style="width: 20px; position: relative; left: -2px" class="far fa-user-circle"></i><small> Perfil</small>
+          <div
+            class="dropdown-menu dropdown-menu-right shadow border-0 p-0 py-1"
+            aria-labelledby="navbarDropdown"
+          >
+            <router-link
+              to="/profile"
+              class="dropdown-item pl-3 pr-5 mr-5 py-2"
+            >
+              <i
+                style="width: 20px; position: relative; left: -2px"
+                class="far fa-user-circle"
+              ></i
+              ><small> Perfil</small>
             </router-link>
             <a class="dropdown-item pl-3 pr-5 mr-5 py-2" href="#">
-              <i style="width: 20px" class="far fa-bookmark"></i> <small>Salvos</small>
+              <i style="width: 20px" class="far fa-bookmark"></i>
+              <small>Salvos</small>
             </a>
             <a class="dropdown-item pl-3 pr-5 mr-5 py-2" href="#">
-              <i style="width: 20px" class="fas fa-cog"></i> <small>Configurações</small>
+              <i style="width: 20px" class="fas fa-cog"></i>
+              <small>Configurações</small>
             </a>
             <a class="dropdown-item pl-3 pr-5 mr-5 py-2" href="#">
-              <i style="width: 20px" class="fas fa-sync"></i> <small>Trocar de conta</small>
+              <i style="width: 20px" class="fas fa-sync"></i>
+              <small>Trocar de conta</small>
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item pl-3 pr-5 mr-5 py-2" @click="logout()">
@@ -74,31 +116,31 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 
 export default {
   name: "Navbar",
-  data () {
+  data() {
     return {
-      searchOptions:[
+      searchOptions: [
         { code: 1, label: "Wygor Fonseca" },
         { code: 1, label: "Dev FullStack" },
-        { code: 1, label: "Dev" },
+        { code: 1, label: "Dev" }
       ],
       selectedSearchOption: null
-    }
+    };
   },
   methods: {
     ...mapMutations(["USER_SET_STATE"]),
-    logout () {
-      this.USER_SET_STATE(null)
+    logout() {
+      this.USER_SET_STATE(null);
 
-      localStorage.removeItem("auth_user")
+      localStorage.removeItem("auth_user");
 
-      this.$router.replace('/login')
+      this.$router.replace("/login");
     }
   }
-}
+};
 </script>
 
 <style>

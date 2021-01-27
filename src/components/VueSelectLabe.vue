@@ -8,8 +8,8 @@
 <script>
 export default {
   name: "vue-select-label",
-  props: ['label']
-}
+  props: ["label"]
+};
 </script>
 
 <style>
@@ -26,7 +26,8 @@ label {
   color: red;
   margin-bottom: 0;
 }
-div.vs--open + label.vssr, div.vs--selected + label.vssr {
+div.vs--open + label.vssr,
+div.vs--selected + label.vssr {
   top: -100% !important;
   /* background: #fff; */
   padding-left: 10px;

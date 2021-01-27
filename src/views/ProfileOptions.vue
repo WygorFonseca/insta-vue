@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <nav class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom border-gray">
+    <nav
+      class="navbar navbar-expand navbar-light bg-white sticky-top border-bottom border-gray"
+    >
       <button @click="$router.go(-1)" class="btn">
         <i class="fas fa-times fa-lg"></i>
       </button>
@@ -8,7 +10,10 @@
         <h6 class="mb-0">Opções</h6>
       </a>
     </nav>
-    <button @click="logout()" class="btn py-3 text-danger btn-lg bg-white text-left w-100 rounded-0">
+    <button
+      @click="logout()"
+      class="btn py-3 text-danger btn-lg bg-white text-left w-100 rounded-0"
+    >
       <div class="d-flex flex-row">
         <h6 class="mb-0 flex-fill">Sair</h6>
         <i class="fas fa-sign-out-alt"></i>
@@ -18,18 +23,18 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 
 export default {
   name: "Profile Options",
   methods: {
     ...mapMutations(["USER_SET_STATE"]),
-    logout () {
-      this.USER_SET_STATE(null)
+    logout() {
+      this.USER_SET_STATE(null);
 
-      localStorage.removeItem("auth_user")
+      localStorage.removeItem("auth_user");
 
-      this.$router.replace('/login')
+      this.$router.replace("/login");
     }
   }
 };

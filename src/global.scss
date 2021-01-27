@@ -26,6 +26,10 @@ button {
   box-shadow: none !important;
 }
 
+input {
+  box-shadow: none !important;
+}
+
 .bg-dark-2 {
   background-color: #1a1a1a;
 }
@@ -46,6 +50,7 @@ button {
 .heart-pulse {
   animation: pulse_animation .250s ease-in-out;
 }
+
 @keyframes pulse_animation {
   from {transform: scale(1.0, 1.0) rotateY(0deg);}
   50% {transform: scale(1.5, 1.5);}
