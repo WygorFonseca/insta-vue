@@ -12,7 +12,7 @@
         <i v-if="$route.name != 'Profile'" class="fas fa-lg fa-camera"></i>
         <i v-else class="fas fa-lg fa-cog"></i>
       </router-link>
-      <a href="#" class="col-xs-4 p-0 navbar-brand">
+      <router-link to="/" class="col-xs-4 p-0 navbar-brand">
         <img
           src="@/assets/logo-instagram.png"
           alt="Instagram"
@@ -22,7 +22,7 @@
         <h6 class="mb-0" v-else>
           {{ $store.state.user.email }}
         </h6>
-      </a>
+      </router-link>
       <button class="btn btn-sm" v-if="$appDevice == 'mobile'">
         <i class="fas fa-lg fa-paper-plane"></i>
       </button>

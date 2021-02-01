@@ -4,7 +4,7 @@
     <div class="container px-sm-5">
       <div class="row justify-content-center mb-3">
         <div class="col-sm-12 col-md-12 col-lg-12 col-12">
-          <PostExpanded :picture_id="id" />
+          <PostExpanded :pictureId="id" />
         </div>
       </div>
     </div>

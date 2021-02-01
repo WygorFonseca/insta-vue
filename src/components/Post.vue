@@ -61,9 +61,9 @@
                 :class="isLiked ? 'fas text-danger heart-pulse' : 'far'"
               ></i>
             </button>
-            <button type="button" class="btn p-0 mr-3">
+            <router-link :to="'/post/' + (picture_id || imageId)" tag="button" type="button" class="btn p-0 mr-3">
               <i class="far fa-lg fa-comment"></i>
-            </button>
+            </router-link>
             <button type="button" class="btn p-0">
               <i class="far fa-lg fa-paper-plane"></i>
             </button>

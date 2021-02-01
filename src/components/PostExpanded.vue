@@ -3,9 +3,9 @@
     <section class="col-7 p-0">
       <img
         :data-src="
-          !picture_id
+          !pictureId
             ? `https://picsum.photos/800/800?random=${imageId}`
-            : `https://picsum.photos/id/${picture_id}/1200/1200`
+            : `https://picsum.photos/id/${pictureId}/1200/1200`
         "
         :class="imageLoading ? 'loadingImage' : 'loadedImage'"
         class="lazyload"
@@ -142,7 +142,7 @@
 <script>
 export default {
   name: "Post",
-  props: ["picture_id"],
+  props: ["pictureId"],
   data() {
     return {
       user: {
