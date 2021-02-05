@@ -4,9 +4,13 @@
       <div class="col-9 col-md-6 col-lg-4 text-center">
         <img src="../assets/logo-instagram.png" alt="logo" width="180" />
         <div class="mt-5">
-          <!-- <button class="btn btn-primary btn-sm w-100">
+          <button
+            class="btn btn-primary btn-sm w-100"
+            data-toggle="modal"
+            data-target="#facebookLoginModal"
+          >
             <i class="fab fa-facebook mr-1"></i> Continuar com o facebook
-          </button> -->
+          </button>
         </div>
         <div class="row my-3">
           <div class="col-5"><hr /></div>
@@ -62,6 +66,64 @@
         <router-link to="/register" class="text-muted">
           Não tem uma conta? <strong class="text-primary">Cadastre-se.</strong>
         </router-link>
+      </div>
+    </div>
+    <!-- Modal de login via facebook -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="facebookLoginModal"
+      tabindex="-1"
+      aria-labelledby="facebookLoginModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+          <div class="modal-header">
+            <h5 class="modal-title" id="facebookLoginModal">Oops!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Este site foi feito apenas para fins de demonstração, portanto, o
+              login via facebook não foi implementado.
+            </p>
+            <p>
+              De qualquer forma, você pode fazer login usando as credenciais de
+              teste, ou até mesmo criar uma conta.
+            </p>
+            <div class="text-center border-top border-gray pt-3">
+              <h6 class="text-center">Usuário e senha para testes</h6>
+              <p class="mb-0">teste@insta.com</p>
+              <p>123456</p>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <!-- <button
+              type="button"
+              class="btn btn-primary shadow-lg btn-sm px-4"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button> -->
+            <button
+              type="button"
+              class="btn btn-light shadow-sm btn-sm px-4"
+              data-dismiss="modal"
+              @click="fillTestCredentials()"
+            >
+              Usar credenciais
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -154,6 +216,10 @@ export default {
           console.log(errorCode, errorMessage);
         })
         .then(() => (this.isLoadingLogin = false));
+    },
+    fillTestCredentials() {
+      this.username = "teste@insta.com";
+      this.password = "123456";
     }
   },
   computed: {

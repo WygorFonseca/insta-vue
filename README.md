@@ -1,38 +1,21 @@
 # insta-vue
 
-<!-- ### Funcionalidades
-- [x] Layout da página -->
+Este projeto foi desenvolvido para fins de portfólio e apresentação
 
-## Project setup
+## Instalação
 
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Compilar e iniciar servidor de desenvolvimento
 
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### Gerar versão de produção
 
 ```
 yarn build
 ```
-
-### Run your end-to-end tests
-
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-
-```
-yarn lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
