@@ -24,7 +24,7 @@
           </div>
           <div class="col-5"><hr /></div>
         </div>
-        <form class="mb-4">
+        <form v-on:submit.prevent="doLogin()" class="mb-4">
           <div class="form-group">
             <label for="input-username" class="lh-fix">E-Mail</label>
             <input
@@ -35,6 +35,7 @@
               aria-describedby="error-input-username"
               v-model="username"
               placeholder="E-mail"
+              required
             />
             <div id="error-input-username" class="invalid-feedback text-left">
               {{ formError.email }}
@@ -50,6 +51,8 @@
               aria-describedby="error-input-password"
               v-model="password"
               placeholder="Senha"
+              @enter="doLogin()"
+              required
             />
             <div id="error-input-password" class="invalid-feedback text-left">
               {{ formError.password }}
@@ -61,9 +64,8 @@
             </a>
           </div>
           <button
-            type="button"
+            type="submit"
             class="btn btn-primary w-100 btn-sm mt-3"
-            @click="doLogin()"
             :disabled="loginButtonDisabled"
           >
             <i class="fas fa-spin fa-spinner" v-show="isLoadingLogin"></i>
