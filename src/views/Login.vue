@@ -2,7 +2,12 @@
   <div class="container h-100">
     <div class="row h-100 align-items-center justify-content-center">
       <div class="col-9 col-md-6 col-lg-4 text-center">
-        <img src="../assets/logo-instagram.png" alt="logo" width="180" />
+        <img
+          src="../assets/logo-instagram.png"
+          alt="logo"
+          width="180"
+          height="64"
+        />
         <div class="mt-5">
           <button
             class="btn btn-primary btn-sm w-100"

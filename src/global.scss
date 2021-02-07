@@ -1,5 +1,23 @@
 @import "@/assets/_variables.scss";
-@import "node_modules/bootstrap/scss/bootstrap";
+// Required BOOTSTRAP
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+// Optional BOOTSTRAP
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/input-group";
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/modal";
+@import "node_modules/bootstrap/scss/nav";
+@import "node_modules/bootstrap/scss/navbar";
+@import "node_modules/bootstrap/scss/dropdown";
+
+// @import "node_modules/bootstrap/scss/bootstrap";
 
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 
@@ -73,4 +91,18 @@ label.lh-fix {
   position: absolute;
   top: -1000px;
   left: -1000px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
 }
