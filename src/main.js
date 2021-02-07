@@ -6,7 +6,10 @@ import router from "./router";
 import store from "./store";
 import "./global.scss";
 import "lazysizes";
-import "bootstrap";
+// import "bootstrap";
+import "bootstrap/js/dist/util";
+import "bootstrap/js/dist/modal";
+import "bootstrap/js/dist/dropdown";
 
 import firebase from "./auth/firebase";
 
@@ -39,9 +42,6 @@ new Vue({
     return {
       teste: "blá blá blá"
     };
-  },
-  mounted() {
-    window.blabla = this;
   },
   render: h => h(App),
   beforeCreate: () => {

@@ -1,6 +1,5 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from "firebase/app";
-// const firebase = require('firebase/app')
 
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
 import "firebase/analytics";
@@ -24,6 +23,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const instance = firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-// firebase.
 
 export default instance;
