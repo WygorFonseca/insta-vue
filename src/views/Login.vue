@@ -21,30 +21,32 @@
         </div>
         <form class="mb-4">
           <div class="form-group">
+            <label for="input-username" class="lh-fix">E-Mail</label>
             <input
               type="text"
               class="form-control bg-light-2"
               :class="formError.email ? 'is-invalid' : ''"
               id="input-username"
-              aria-describedby="input-username"
+              aria-describedby="error-input-username"
               v-model="username"
               placeholder="E-mail"
             />
-            <div id="input-username" class="invalid-feedback text-left">
+            <div id="error-input-username" class="invalid-feedback text-left">
               {{ formError.email }}
             </div>
           </div>
           <div class="form-group">
+            <label for="input-password" class="lh-fix">Senha</label>
             <input
               type="password"
               class="form-control bg-light-2"
               :class="formError.password ? 'is-invalid' : ''"
               id="input-password"
-              aria-describedby="input-password"
+              aria-describedby="error-input-password"
               v-model="password"
               placeholder="Senha"
             />
-            <div id="input-password" class="invalid-feedback text-left">
+            <div id="error-input-password" class="invalid-feedback text-left">
               {{ formError.password }}
             </div>
           </div>
@@ -75,13 +77,13 @@
       class="modal fade"
       id="facebookLoginModal"
       tabindex="-1"
-      aria-labelledby="facebookLoginModal"
+      aria-labelledby="facebookLoginModalTitle"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
           <div class="modal-header">
-            <h5 class="modal-title" id="facebookLoginModal">Oops!</h5>
+            <h5 class="modal-title" id="facebookLoginModalTitle">Oops!</h5>
             <button
               type="button"
               class="close"
@@ -107,13 +109,6 @@
             </div>
           </div>
           <div class="modal-footer justify-content-center">
-            <!-- <button
-              type="button"
-              class="btn btn-primary shadow-lg btn-sm px-4"
-              data-dismiss="modal"
-            >
-              Fechar
-            </button> -->
             <button
               type="button"
               class="btn btn-light shadow-sm btn-sm px-4"

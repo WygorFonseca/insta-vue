@@ -1,3 +1,4 @@
+@import "@/assets/_variables.scss";
 @import "node_modules/bootstrap/scss/bootstrap";
 
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
@@ -8,7 +9,7 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "@fortawesome/fontawesome-free/scss/regular";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
-$vs-component-line-height: 1.0;
+$vs-component-line-height: 1;
 
 //  Active State
 $vs-state-active-bg: #000000;
@@ -16,7 +17,9 @@ $vs-state-active-color: #000000;
 
 @import "../node_modules/vue-select/dist/vue-select.css";
 
-html, body, div#app {
+html,
+body,
+div#app {
   background-color: #fafafa;
   height: 100%;
 }
@@ -34,12 +37,14 @@ input {
   background-color: #1a1a1a;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   opacity: 0;
-  transition: opacity .25s ease;
+  transition: opacity 0.25s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -48,11 +53,24 @@ input {
 }
 
 .heart-pulse {
-  animation: pulse_animation .250s ease-in-out;
+  animation: pulse_animation 0.25s ease-in-out;
 }
 
 @keyframes pulse_animation {
-  from {transform: scale(1.0, 1.0) rotateY(0deg);}
-  50% {transform: scale(1.5, 1.5);}
-  to {transform: scale(1.0, 1.0) rotateY(180deg);}
+  from {
+    transform: scale(1, 1) rotateY(0deg);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  to {
+    transform: scale(1, 1) rotateY(180deg);
+  }
+}
+
+/* Fix to pass Lighthouse: */
+label.lh-fix {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
 }
